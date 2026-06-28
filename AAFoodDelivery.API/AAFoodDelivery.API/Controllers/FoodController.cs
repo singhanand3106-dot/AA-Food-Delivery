@@ -21,5 +21,45 @@ namespace AAFoodDelivery.API.Controllers
         {
             return await _context.FoodItems.ToListAsync();
         }
+        
+        [HttpPost]
+        public async Task<ActionResult<FoodItem>> AddFood(FoodItem food)
+        {
+            _context.FoodItems.Add(food);
+            await _context.SaveChangesAsync();
+
+            return Ok(food);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateFood(int id, FoodItem food)
+        {
+            if (id != food.FoodId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(food).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFood(int id)
+        {
+            var food = await _context.FoodItems.FindAsync(id);
+
+            if (food == null)
+            {
+                return NotFound();
+            }
+
+            _context.FoodItems.Remove(food);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
     }
 }
