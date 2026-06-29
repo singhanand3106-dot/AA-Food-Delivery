@@ -1,36 +1,50 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, JsonPipe],
-  template: `
-    <h1 style="color:red">INLINE TEMPLATE</h1>
-
-    <p>Foods Length: {{ foods.length }}</p>
-
-    <pre>{{ foods | json }}</pre>
-  `
+  imports: [CommonModule],
+  templateUrl: './menu.html',
+  styleUrl: './menu.css'
 })
 export class Menu {
 
   private foodService = inject(FoodService);
+  private cdr = inject(ChangeDetectorRef);
 
   foods: any[] = [];
 
   ngOnInit(): void {
 
-    this.foodService.getFoods().subscribe(data => {
+    this.foodService.getFoods().subscribe({
 
-      console.log("Received:", data);
+      next: (data) => {
 
-      this.foods = data;
+        console.log('Menu Data:', data);
 
-      console.log("Assigned:", this.foods);
+        this.foods = [...data];
+
+        this.cdr.detectChanges();
+
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+      }
 
     });
+
+  }
+
+  addToCart(food: any) {
+
+    this.foodService.addToCart(food);
+
+    alert(food.name + ' added to cart');
 
   }
 

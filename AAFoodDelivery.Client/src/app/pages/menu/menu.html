@@ -1,7 +1,58 @@
 <div class="container mt-5">
 
-  <h2>Our Menu</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
 
-  <pre>{{ foods | json }}</pre>
+    <h2 class="fw-bold">
+      Our Menu
+    </h2>
+
+    <span class="badge bg-warning text-dark fs-6">
+      Total Foods: {{ foods.length }}
+    </span>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-4 col-md-6 mb-4"
+         *ngFor="let food of foods">
+
+      <div class="card h-100 shadow-sm">
+
+        <img [src]="'images/' + food.imageUrl"
+             class="card-img-top"
+             [alt]="food.name">
+        <div class="card-body d-flex flex-column">
+
+          <h5 class="card-title">
+            {{ food.name }}
+          </h5>
+
+          <p class="card-text text-muted">
+            {{ food.description }}
+          </p>
+
+          <h4 class="text-danger">
+            ₹{{ food.price }}
+          </h4>
+
+          <p class="text-secondary">
+            {{ food.category }}
+          </p>
+
+          <button class="btn btn-warning mt-auto"
+                  (click)="addToCart(food)">
+
+            Add to Cart
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
