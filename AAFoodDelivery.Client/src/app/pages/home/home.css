@@ -113,3 +113,14 @@
   border-radius: 8px;
   font-size: 14px;
 }
+.home-logo {
+  width: 220px;
+  height: auto;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  transition: .3s;
+}
+
+  .home-logo:hover {
+    transform: scale(1.05);
+  }
