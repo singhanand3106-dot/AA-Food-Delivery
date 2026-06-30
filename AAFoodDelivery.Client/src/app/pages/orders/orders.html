@@ -1,1 +1,171 @@
-<p>orders works!</p>
+<div *ngIf="orderItems.length === 0" class="text-center mt-5">
+
+  <img src="images/logo.png" width="120" class="mb-3">
+
+  <h2>No Orders Yet</h2>
+
+  <p class="text-muted">
+    You haven't placed any orders yet.
+  </p>
+
+  <a routerLink="/menu"
+     class="btn btn-warning mt-3">
+
+    Browse Menu
+
+  </a>
+
+</div>
+<div *ngIf="orderItems.length > 0">
+
+  <div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg p-5">
+
+      <div class="text-center">
+
+        <i class="bi bi-check-circle-fill text-success"
+           style="font-size:70px;"></i>
+
+        <h2 class="fw-bold mt-3 text-success">
+          Order Placed Successfully!
+        </h2>
+
+        <p class="text-muted">
+          Thank you for ordering from
+          <strong>A&A Food Delivery</strong>
+        </p>
+
+      </div>
+
+      <hr>
+
+      <div class="row mb-4">
+
+        <div class="col-md-6">
+
+          <h5>Order ID</h5>
+
+          <p>{{orderId}}</p>
+
+        </div>
+
+        <div class="col-md-6 text-md-end">
+
+          <h5>Date</h5>
+
+          <p>{{orderDate | date:'medium'}}</p>
+
+        </div>
+
+      </div>
+
+      <h4 class="mb-3">
+        Invoice
+      </h4>
+
+      <table class="table table-bordered">
+
+        <thead class="table-warning">
+
+          <tr>
+
+            <th>Food Item</th>
+
+            <th>Quantity</th>
+
+            <th>Price</th>
+
+            <th>Total</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let item of orderItems">
+
+            <td>{{item.name}}</td>
+
+            <td>{{item.quantity}}</td>
+
+            <td>₹{{item.price}}</td>
+
+            <td>₹{{item.price * item.quantity}}</td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <div class="row justify-content-end">
+
+        <div class="col-md-4">
+
+          <h5>
+            Subtotal
+            <span class="float-end">
+              ₹{{getSubTotal()}}
+            </span>
+          </h5>
+
+          <h5>
+            Delivery
+            <span class="float-end">
+              ₹{{deliveryCharge}}
+            </span>
+          </h5>
+
+          <hr>
+
+          <h3 class="text-danger">
+
+            Grand Total
+
+            <span class="float-end">
+
+              ₹{{getGrandTotal()}}
+
+            </span>
+
+          </h3>
+
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5">
+
+        <a routerLink="/menu"
+           class="btn btn-warning me-3">
+
+          Order More
+
+        </a>
+
+        <div class="text-center mt-5">
+
+          
+
+          <a routerLink="/"
+             class="btn btn-success me-3">
+            Back to Home
+          </a>
+
+          <button class="btn btn-primary"
+                  (click)="downloadInvoice()">
+
+            Download Invoice
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

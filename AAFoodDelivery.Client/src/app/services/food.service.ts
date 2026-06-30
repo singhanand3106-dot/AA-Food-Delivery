@@ -18,15 +18,47 @@ export class FoodService {
   }
 
   addToCart(food: any) {
-    this.cart.push(food);
+
+    const item = this.cart.find(x => x.foodId === food.foodId);
+
+    if (item) {
+      item.quantity++;
+    } else {
+      this.cart.push({
+        ...food,
+        quantity: 1
+      });
+    }
+
   }
 
   getCart() {
     return this.cart;
   }
 
+  increaseQuantity(index: number) {
+    this.cart[index].quantity++;
+  }
+
+  decreaseQuantity(index: number) {
+
+    if (this.cart[index].quantity > 1) {
+      this.cart[index].quantity--;
+    } else {
+      this.removeFromCart(index);
+    }
+
+  }
+
   removeFromCart(index: number) {
     this.cart.splice(index, 1);
+  }
+
+  getTotal(): number {
+
+    return this.cart.reduce((total, item) =>
+      total + (item.price * item.quantity), 0);
+
   }
 
 }

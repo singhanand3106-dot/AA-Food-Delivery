@@ -1,59 +1,155 @@
 <div class="container mt-5">
 
-  <h2>Shopping Cart</h2>
+  <h2 class="fw-bold mb-4">
+    🛒 Shopping Cart
+  </h2>
 
-  <table class="table table-bordered mt-4">
+  <div *ngIf="cartItems.length == 0" class="alert alert-warning text-center">
 
-    <thead>
+    Your cart is empty.
 
-      <tr>
+    <br><br>
 
-        <th>Name</th>
+    <a routerLink="/menu" class="btn btn-warning">
+      Go to Menu
+    </a>
 
-        <th>Price</th>
+  </div>
 
-        <th>Category</th>
+  <div *ngIf="cartItems.length > 0">
 
-        <th></th>
+    <table class="table table-bordered align-middle">
 
-      </tr>
+      <thead class="table-warning">
 
-    </thead>
+        <tr>
 
-    <tbody>
+          <th>Image</th>
 
-      <tr *ngFor="let item of cartItems; let i = index">
+          <th>Food</th>
 
-        <td>{{item.name}}</td>
+          <th>Price</th>
 
-        <td>₹{{item.price}}</td>
+          <th>Quantity</th>
 
-        <td>{{item.category}}</td>
+          <th>Total</th>
 
-        <td>
+          <th>Action</th>
 
-          <button class="btn btn-danger btn-sm"
-                  (click)="remove(i)">
+        </tr>
 
-            Remove
+      </thead>
 
-          </button>
+      <tbody>
 
-        </td>
+        <tr *ngFor="let item of cartItems; let i = index">
 
-      </tr>
+          <td width="120">
 
-    </tbody>
+            <img [src]="'images/' + item.imageUrl"
+                 width="90"
+                 class="rounded">
 
-  </table>
+          </td>
 
-  <h3>Total : ₹{{getTotal()}}</h3>
+          <td>
 
-  <a routerLink="/checkout"
-     class="btn btn-success">
+            <strong>{{ item.name }}</strong>
 
-    Proceed to Checkout
+            <br>
 
-  </a>
+            <small class="text-muted">
+              {{ item.category }}
+            </small>
+
+          </td>
+
+          <td>
+            ₹{{ item.price }}
+          </td>
+
+          <td>
+
+            <button class="btn btn-sm btn-danger me-2"
+                    (click)="decrease(i)">
+
+              -
+
+            </button>
+
+            <strong>{{ item.quantity }}</strong>
+
+            <button class="btn btn-sm btn-success ms-2"
+                    (click)="increase(i)">
+
+              +
+
+            </button>
+
+          </td>
+
+          <td>
+
+            ₹{{ item.price * item.quantity }}
+
+          </td>
+
+          <td>
+
+            <button class="btn btn-outline-danger btn-sm"
+                    (click)="remove(i)">
+
+              Remove
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <div class="card p-4 mt-4">
+
+      <h5>
+        Subtotal :
+        <span class="float-end">
+          ₹{{ getSubTotal() }}
+        </span>
+      </h5>
+
+      <h5>
+        Delivery :
+        <span class="float-end">
+          ₹{{ deliveryCharge }}
+        </span>
+      </h5>
+
+      <hr>
+
+      <h3 class="text-danger">
+
+        Grand Total :
+
+        <span class="float-end">
+
+          ₹{{ getGrandTotal() }}
+
+        </span>
+
+      </h3>
+
+      <a routerLink="/checkout"
+         class="btn btn-success mt-3">
+
+        Proceed to Checkout
+
+      </a>
+
+    </div>
+
+  </div>
 
 </div>

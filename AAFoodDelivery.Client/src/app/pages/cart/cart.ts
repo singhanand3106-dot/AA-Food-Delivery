@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FoodService } from '../../services/food.service';
 import { RouterLink } from '@angular/router';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,19 +16,26 @@ export class Cart {
 
   cartItems = this.foodService.getCart();
 
-  remove(index: number) {
+  deliveryCharge = 40;
 
-    this.foodService.removeFromCart(index);
-
+  increase(index: number) {
+    this.foodService.increaseQuantity(index);
   }
 
-  getTotal(): number {
+  decrease(index: number) {
+    this.foodService.decreaseQuantity(index);
+  }
 
-    return this.cartItems.reduce(
-      (total, item) => total + item.price,
-      0
-    );
+  remove(index: number) {
+    this.foodService.removeFromCart(index);
+  }
 
+  getSubTotal(): number {
+    return this.foodService.getTotal();
+  }
+
+  getGrandTotal(): number {
+    return this.getSubTotal() + this.deliveryCharge;
   }
 
 }

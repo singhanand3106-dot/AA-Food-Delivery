@@ -1,7 +1,14 @@
 <nav class="navbar">
 
   <div class="logo">
-    AA Food Delivery
+
+    <img src="images/logo.png"
+         alt="Logo"
+         width="70"
+         height="70"
+         class="me-2">
+    <span>AA Food Delivery</span>
+
   </div>
 
   <ul>
@@ -15,7 +22,19 @@
     </li>
 
     <li>
-      <a routerLink="/cart">Cart</a>
+      <a routerLink="/cart">
+
+        <i class="bi bi-cart-fill"></i>
+
+        Cart
+
+        <span class="badge bg-warning text-dark ms-1">
+
+          {{ cartCount }}
+
+        </span>
+
+      </a>
     </li>
 
     <li>
@@ -30,10 +49,15 @@
 
   <div class="auth">
 
-    <a routerLink="/login">Login</a>
+    <a routerLink="/login">
+      Login
+    </a>
 
-    <a routerLink="/register" class="register">
+    <a routerLink="/register"
+       class="register">
+
       Register
+
     </a>
 
   </div>

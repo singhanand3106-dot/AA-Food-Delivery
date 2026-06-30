@@ -114,13 +114,50 @@
   font-size: 14px;
 }
 .home-logo {
-  width: 220px;
+  width: 180px;
   height: auto;
-  border-radius: 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.15);
-  transition: .3s;
+  display: block;
+  margin: 0 auto 20px;
 }
 
   .home-logo:hover {
     transform: scale(1.05);
+  }
+
+.why-us {
+  background: #fffaf5;
+}
+
+.feature-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  transition: .3s;
+  height: 100%;
+}
+
+  .feature-card:hover {
+    transform: translateY(-8px);
+  }
+
+.offer-section {
+  padding-bottom: 80px;
+}
+
+.offer-card {
+  background: linear-gradient(135deg,#ff7a18,#ffb347);
+  color: white;
+  padding: 50px;
+  border-radius: 25px;
+  text-align: center;
+}
+
+  .offer-card h2 {
+    font-size: 42px;
+    font-weight: 800;
+  }
+
+  .offer-card p {
+    margin: 20px 0;
   }

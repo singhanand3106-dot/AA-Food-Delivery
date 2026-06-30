@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,5 +10,16 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar {
+
+  private foodService = inject(FoodService);
+
+  get cartCount(): number {
+
+    return this.foodService.getCart().reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+
+  }
 
 }
