@@ -77,8 +77,9 @@ http://localhost:4200
 ## 👨‍💻 Developed By
 
 **Animesh Kashyap**
+**Anand Singh**
 
-BCA Student
+BCA Students
 
 Institute of Information Technology & Management (IITM), Janakpuri
 
