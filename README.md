@@ -76,7 +76,8 @@ http://localhost:4200
 
 ## 👨‍💻 Developed By
 
-**Animesh Kashyap**
+**Animesh Kashyap** 
+**&**
 **Anand Singh**
 
 BCA Students
